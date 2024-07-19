@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<nav>
+  <ul>
+    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+    <li><a href="{% url 'deliveries' %}">Deliveries</a></li>
+    <li><a href="{% url 'reports' %}">Reports</a></li>
+    <li><a href="{% url 'settings' %}">Settings</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+  {% if request.path == '/dashboard/deliveries/' %}
+    {% block deliveries_content %}
+    {% endblock %}
+  {% elif request.path == '/dashboard/reports/'%}
+    {% block reports_content %}
+    {% endblock %}
+  {% elif request.path == '/dashboard/settings/' %}
+    {% block settings_content %}
+    {% endblock %}
+  {% else %}
+    <h5>Main Content</h5>
+  {% endif %}
+</div>
+{% endblock %}
