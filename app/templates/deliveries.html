@@ -1,0 +1,30 @@
+{% extends "dashboard.html" %}
+{% block deliveries_content %}
+<h2>Deliveries</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>App Name</th>
+      <th>Earnings</th>
+      <th>Expenses</th>
+      <th>Mileage</th>
+      <th>Time Spent</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for delivery in deliveries %}
+    <tr>
+      <td>{{ delivery.date }}</td>
+      <td>{{ delivery.app_name }}</td>
+      <td>{{ delivery.earnings }}</td>
+      <td>{{ delivery.expenses }}</td>
+      <td>{{ delivery.mileage }}</td>
+      <td>{{ delivery.time_spent }}</td>
+      <td>{{ delivery.description }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
