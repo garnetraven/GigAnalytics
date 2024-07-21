@@ -1,7 +1,11 @@
 {% extends "base.html" %} {% block title %} Home Page {% endblock %}
 {% block content %}
-<h1>GigAnlytics</h1>
-<p>Track your delivery business finances!</p>
-<a href="{% url 'register' %}">Register</a>
-<a href="{% url 'login' %}">Login</a>
+<div class="text-center mt-5">
+  <h1 class="display-4">GigAnlytics</h1>
+  <p class="lead">Track your delivery business finances!</p>
+  <div class="mt-4">
+    <a href="{% url 'register' %}" class="btn btm-primary btn-lg mr-2">Register</a>
+    <a href="{% url 'login' %}" class="btn btn-secondary btn-lg">Login</a>
+  </div>
+</div>
 {% endblock %}

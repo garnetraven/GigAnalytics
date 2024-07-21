@@ -11,5 +11,3 @@ class Delivery(models.Model):
     time_spent = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank=True, null=True)
 
-    def __str__(self):
-        return f"Delivery on {self.date} by {self.user.username}"
