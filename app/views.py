@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
+from .forms import RegisterForm, DeliveryForm
 from .models import Delivery
 
 def home(request):
@@ -16,7 +17,7 @@ def register(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             if user is not None:
-                auth_login(request, user)
+                login(request, user)
                 return redirect('/login')
     else:
         form = RegisterForm()
@@ -27,7 +28,7 @@ def login_view(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
-            auth_login(request, user)
+            login(request, user)
             return redirect('dashboard')
     else:
         form = AuthenticationForm()
@@ -37,13 +38,28 @@ def login_view(request):
 def dashboard(request):
     return render(request, "dashboard.html")
 
+@login_required
 def deliveries(request):
-    if not request.user.is_authenticated:
-        return redirect('login')
-
     deliveries = Delivery.objects.filter(user=request.user)
 
-    return render(request, "deliveries.html", {"deliveries": deliveries})
+    if request.method == 'POST':
+        form = DeliveryForm(request.POST)
+        if form.is_valid():
+            delivery = form.save(commit=False)
+            delivery.user = request.user
+            delivery.save()
+            return redirect('deliveries')
+    else:
+        form = DeliveryForm()
+
+    sort = request.GET.get('sort', 'date')
+    if sort:
+        deliveries = deliveries.order_by(sort)
+
+    return render(request, 'deliveries.html', {
+        'deliveries': deliveries,
+        'form': form,
+    })
 
 def reports(request):
     return render(request, "reports.html")

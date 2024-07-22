@@ -10,12 +10,16 @@
             <form method="get" class="form-inline justify-content-center">
                 <label for="sort" class="mr-2">Sort by:</label>
                 <select name="sort" id="sort" class="form-control mr-2">
-                    <option value="date">Date</option>
+                    <option value="-date">Date (Descending)</option>
                     <option value="app_name">App Name</option>
-                    <option value="earnings">Earnings</option>
-                    <option value="expenses">Expenses</option>
-                    <option value="mileage">Mileage</option>
-                    <option value="time_spent">Time Spent</option>
+                    <option value="earnings">Earnings (Ascending)</option>
+                    <option value="-earnings">Earnings (Descending)</option>
+                    <option value="expenses">Expenses (Ascending)</option>
+                    <option value="-expenses">Expenses (Descending)</option>
+                    <option value="mileage">Mileage (Ascending)</option>
+                    <option value="-mileage">Mileage (Descending)</option>
+                    <option value="time_spent">Time Spent (Ascending)</option>
+                    <option value="-time_spent">Time Spent (Descending)</option>
                 </select>
                 <button type="submit" class="btn btn-primary">Sort</button>
             </form>
@@ -49,7 +53,7 @@
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
+       </table>
     </div>
 
     <!-- Add new delivery form -->
@@ -57,38 +61,7 @@
         <h3 class="text-center">Add New Delivery</h3>
         <form method="post" class="mt-4">
             {% csrf_token %}
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="date">Date</label>
-                    <input type="date" class="form-control" id="date" name="date" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="app_name">App Name</label>
-                    <input type="text" class="form-control" id="app_name" name="app_name" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="earnings">Earnings</label>
-                    <input type="number" class="form-control" id="earnings" name="earnings" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-4">
-                    <label for="expenses">Expenses</label>
-                    <input type="number" class="form-control" id="expenses" name="expenses" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="mileage">Mileage</label>
-                    <input type="number" class="form-control" id="mileage" name="mileage" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="time_spent">Time Spent</label>
-                    <input type="number" class="form-control" id="time_spent" name="time_spent" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
-            </div>
+            {{ form.as_p }}
             <div class="text-center">
                 <button type="submit" class="btn btn-success">Add Delivery</button>
             </div>
