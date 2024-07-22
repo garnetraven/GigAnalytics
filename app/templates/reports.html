@@ -1,5 +1,29 @@
 {% extends "dashboard.html" %}
 
 {% block reports_content %}
-<h1>Reports</h1>
+<div class="container mt-4">
+    <h2 class="text-center">Weekly Data Report</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h5>Average Earnings: ${{ earnings_mean|floatformat:2 }}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Total Expenses: ${{ expenses_sum|floatformat:2 }}</h5>
+        </div>
+        <div class="col-md-4">
+            <h5>Average Mileage: {{ mileage_mean|floatformat:2 }} miles</h5>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <img src="data:image/png;base64,{{ image_base64 }}" alt="Weekly Report" class="img-fluid">
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <a href="?week_start_date={{ prev_week_start|date:"Y-m-d" }}" class="btn btn-primary">Previous Week</a>
+            <a href="?week_start_date={{ next_week_start|date:"Y-m-d" }}" class="btn btn-primary">Next Week</a>
+        </div>
+    </div>
+</div>
 {% endblock %}

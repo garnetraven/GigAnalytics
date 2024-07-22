@@ -17,5 +17,11 @@ class DeliveryForm(forms.ModelForm):
         model = Delivery
         fields = ['date', 'app_name', 'earnings', 'expenses', 'mileage', 'time_spent', 'description']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control form-control-sm'}),
+            'app_name': forms.TextInput(attrs={'class': 'form-control form-control-sm'}),
+            'earnings': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+            'expenses': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+            'mileage': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+            'time_spent': forms.NumberInput(attrs={'class': 'form-control form-control-sm'}),
+            'description': forms.Textarea(attrs={'class': 'form-control form-control-sm', 'rows': 2}),
         }
