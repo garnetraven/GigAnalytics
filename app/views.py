@@ -46,6 +46,7 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
+@login_required
 def dashboard(request):
     return render(request, "dashboard.html")
 
@@ -78,6 +79,7 @@ def get_week_range(date):
     end_of_week = start_of_week + timedelta(days=6)  # Sunday
     return start_of_week, end_of_week
 
+@login_required
 def reports(request):
     # Get current week or week from query parameters
     today = timezone.now().date()
@@ -164,5 +166,6 @@ def reports(request):
     }
     return render(request, 'reports.html', context)
 
+@login_required
 def settings(request):
     return render(request, "settings.html")
