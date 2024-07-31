@@ -6,7 +6,6 @@ import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import seaborn as sns
 import io
 import base64
 from django.utils.dateparse import parse_date
@@ -14,7 +13,7 @@ from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import RegisterForm, DeliveryForm
 from .models import Delivery
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 def home(request):
     return render(request, "home.html")
